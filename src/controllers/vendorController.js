@@ -29,7 +29,14 @@ const validatePassword = (password) => {
 
 export const getProfile = async (req, res) => {
   const user = await getUserById(req.user.id);
-  res.json({ id: user.id, name: user.name, email: user.email, role: user.role, profile_pic_url: user.profile_pic_url });
+  res.json({ 
+    id: user.id, 
+    name: user.name, 
+    email: user.email, 
+    role: user.role, 
+    profile_pic_url: user.profile_pic_url,
+    createdAt: user.createdAt 
+  });
 };
 
 export const updateProfile = async (req, res) => {
