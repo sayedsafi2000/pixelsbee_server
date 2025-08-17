@@ -53,6 +53,8 @@ const startServer = async () => {
         'http://localhost:3000', 
         'http://localhost:3001',
         'https://pixelsbee-server.onrender.com',
+        'https://pixelsbee-client.vercel.app',
+        'https://pixelsbee.com',
         process.env.FRONTEND_URL
       ].filter(Boolean), // Remove undefined values
       credentials: true,
