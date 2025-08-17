@@ -58,7 +58,9 @@ const startServer = async () => {
         process.env.FRONTEND_URL
       ].filter(Boolean), // Remove undefined values
       credentials: true,
-      optionsSuccessStatus: 200
+      optionsSuccessStatus: 200,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
     };
     app.use(cors(corsOptions));
     
@@ -77,6 +79,22 @@ const startServer = async () => {
         status: "OK", 
         timestamp: new Date().toISOString(),
         environment: process.env.NODE_ENV || 'development'
+      });
+    });
+
+    // Debug CORS endpoint
+    app.get("/debug-cors", (req, res) => {
+      res.header('Access-Control-Allow-Origin', 'https://pixelsbee-client.vercel.app');
+      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+      res.json({ 
+        message: "CORS test endpoint",
+        origin: req.headers.origin,
+        corsHeaders: {
+          'Access-Control-Allow-Origin': 'https://pixelsbee-client.vercel.app',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
+        }
       });
     });
 
