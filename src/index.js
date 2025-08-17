@@ -49,14 +49,7 @@ const startServer = async () => {
     
     // CORS configuration for production
     const corsOptions = {
-      origin: [
-        'http://localhost:3000', 
-        'http://localhost:3001',
-        'https://pixelsbee-server.onrender.com',
-        'https://pixelsbee-client.vercel.app',
-        'https://pixelsbee.com',
-        process.env.FRONTEND_URL
-      ].filter(Boolean), // Remove undefined values
+      origin: true, // Allow all origins temporarily
       credentials: true,
       optionsSuccessStatus: 200,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
