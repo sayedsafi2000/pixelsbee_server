@@ -49,9 +49,12 @@ const startServer = async () => {
     
     // CORS configuration for production
     const corsOptions = {
-      origin: process.env.NODE_ENV === 'production' 
-        ? [process.env.FRONTEND_URL, 'https://yourdomain.com'] // Add your frontend URL
-        : ['http://localhost:3000', 'http://localhost:3001'],
+      origin: [
+        'http://localhost:3000', 
+        'http://localhost:3001',
+        'https://pixelsbee-server.onrender.com',
+        process.env.FRONTEND_URL
+      ].filter(Boolean), // Remove undefined values
       credentials: true,
       optionsSuccessStatus: 200
     };
