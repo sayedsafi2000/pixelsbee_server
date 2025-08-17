@@ -12,7 +12,13 @@
     "deploy:render": "echo 'Deploy to Render: Push to GitHub and connect to Render dashboard'",
     "deploy:railway": "echo 'Deploy to Railway: Push to GitHub and connect to Railway dashboard'"
   },
-  "keywords": ["api", "nodejs", "express", "mongodb", "pixelsbee"],
+  "keywords": [
+    "api",
+    "nodejs",
+    "express",
+    "mongodb",
+    "pixelsbee"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
@@ -23,7 +29,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

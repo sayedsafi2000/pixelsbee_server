@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import fetch from 'node-fetch';
 import { authenticate } from '../middleware/authMiddleware.js';
 import { authorizeRoles } from '../middleware/roleMiddleware.js';
 import { uploadImage, create, update, remove, listByVendor, listAll, search, fetchCategories, getProduct } from '../controllers/productController.js';
@@ -47,17 +48,21 @@ router.get('/:id/download', authenticate, async (req, res) => {
     // Check if product is free
     if (product.price <= 0) {
       // Free product - allow download
-      if (product.original_url) {
-        return res.redirect(product.original_url);
-      } else {
-        return res.redirect(product.image_url);
-      }
+      const downloadUrl = product.original_url || product.image_url;
+      
+      // For now, just return the download URL in the response
+      // The client will handle the actual download
+      res.json({ 
+        downloadUrl,
+        filename: `${product.title.replace(/\s+/g, '_')}.jpg`,
+        message: 'Free download available'
+      });
+    } else {
+      // For paid products, check if user has purchased
+      // TODO: Implement purchase verification logic here
+      // For now, we'll block all paid downloads until purchase system is implemented
+      return res.status(403).json({ message: 'You must purchase this product to download the original image.' });
     }
-    
-    // For paid products, check if user has purchased
-    // TODO: Implement purchase verification logic here
-    // For now, we'll block all paid downloads until purchase system is implemented
-    return res.status(403).json({ message: 'You must purchase this product to download the original image.' });
     
   } catch (error) {
     console.error('Download error:', error);
