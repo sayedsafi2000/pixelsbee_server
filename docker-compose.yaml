@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  server:
+    container_name: pixelsbee-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=5001
+      # Set these in Coolify as environment variables or secrets
+      # - MONGODB_URI=your-mongodb-uri
+      # - JWT_SECRET=your-strong-secret
+      # - CLOUDINARY_CLOUD_NAME=
+      # - CLOUDINARY_API_KEY=
+      # - CLOUDINARY_API_SECRET=
+    ports:
+      - "5001:5001"
+    restart: always
+
