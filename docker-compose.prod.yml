@@ -6,10 +6,10 @@ services:
       context: ./server
       dockerfile: Dockerfile
     ports:
-      - "5001:5001"
+      - "5080:5080"
     environment:
       - NODE_ENV=${NODE_ENV:-production}
-      - PORT=${PORT:-5001}
+      - PORT=${PORT:-5080}
       - MONGODB_URI=${MONGODB_URI}
       - JWT_SECRET=${JWT_SECRET}
       - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}

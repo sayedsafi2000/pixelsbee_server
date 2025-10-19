@@ -97,7 +97,7 @@ const startServer = async () => {
       res.status(500).json({ message: "Server error" });
     });
 
-    const PORT = process.env.PORT || 5001;
+    const PORT = process.env.PORT || 5080;
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
