@@ -28,8 +28,8 @@ COPY . .
 # Use non-root user for better security
 USER node
 
-# Expose the application port (defaults to 5001; app also reads PORT env)
-EXPOSE 5001
+# Expose the application port (defaults to 5080; app also reads PORT env)
+EXPOSE 5080
 
 # Start the server
 CMD ["node", "src/index.js"]

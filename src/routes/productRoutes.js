@@ -7,7 +7,11 @@ import { uploadImage, create, update, remove, listByVendor, listAll, search, fet
 import { getProductById } from '../models/productModel.js';
 
 const router = express.Router();
-const upload = multer();
+const upload = multer({
+  limits: {
+    fileSize: 25 * 1024 * 1024 // 25MB limit
+  }
+});
 
 // Public: list all products
 router.get('/', listAll);
