@@ -13,12 +13,32 @@ export const uploadImage = async (req, res) => {
     const b64 = Buffer.from(req.file.buffer).toString('base64');
     const dataURI = `data:${req.file.mimetype};base64,${b64}`;
     
-    console.log('Uploading to Cloudinary...');
-    // Upload to Cloudinary
-    const result = await cloudinary.uploader.upload(dataURI, {
+    // Check if this is a preview image (should be resized to 2400x1080)
+    const isPreview = req.body.isPreview === 'true';
+    
+    console.log('Uploading to Cloudinary...', isPreview ? '(Preview - will resize to 2400x1080)' : '(Original - no resize)');
+    
+    // Prepare upload options
+    const uploadOptions = {
       folder: 'pixelsbee',
       resource_type: 'auto'
-    });
+    };
+    
+    // If it's a preview image, add transformation to resize to 2400x1080px
+    if (isPreview) {
+      uploadOptions.transformation = [
+        {
+          width: 2400,
+          height: 1080,
+          crop: 'fill', // Fill the dimensions (may crop to fit)
+          gravity: 'auto', // Auto-detect the best area to focus on
+          quality: 'auto:good' // Optimize quality automatically
+        }
+      ];
+    }
+    
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(dataURI, uploadOptions);
     
     console.log('Upload successful:', result.secure_url);
     res.json({ url: result.secure_url });
