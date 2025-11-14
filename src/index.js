@@ -11,6 +11,7 @@ import "./models/userCart.js";
 import "./models/userFavorite.js";
 import "./models/userDownload.js";
 import "./models/orderModel.js";
+import "./models/reviewModel.js";
 
 // Load environment variables
 dotenv.config();

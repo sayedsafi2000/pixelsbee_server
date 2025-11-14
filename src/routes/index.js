@@ -5,6 +5,7 @@ import adminRoutes from './adminRoutes.js';
 import vendorRoutes from './vendorRoutes.js';
 import userRoutes from './userRoutes.js';
 import orderRoutes from './orderRoutes.js';
+import reviewRoutes from './reviewRoutes.js';
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use('/admin', adminRoutes);
 router.use('/vendor', vendorRoutes);
 router.use('/user', userRoutes);
 router.use('/orders', orderRoutes);
+router.use('/reviews', reviewRoutes);
 
 export default router; 
