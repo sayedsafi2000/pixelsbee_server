@@ -9,12 +9,20 @@ export const uploadImage = async (req, res) => {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
   
   try {
+    // Check file size for original images (30MB limit)
+    const maxSize = 30 * 1024 * 1024; // 30MB in bytes
+    const isPreview = req.body.isPreview === 'true';
+    
+    if (!isPreview && req.file.size > maxSize) {
+      const fileSizeMB = (req.file.size / (1024 * 1024)).toFixed(2);
+      return res.status(400).json({ 
+        message: `Original image size must be less than 30MB. Current size: ${fileSizeMB}MB` 
+      });
+    }
+    
     // Convert buffer to base64 string
     const b64 = Buffer.from(req.file.buffer).toString('base64');
     const dataURI = `data:${req.file.mimetype};base64,${b64}`;
-    
-    // Check if this is a preview image (should be resized to 2400x1080)
-    const isPreview = req.body.isPreview === 'true';
     
     console.log('Uploading to Cloudinary...', isPreview ? '(Preview - will resize to 2400x1080)' : '(Original - no resize)');
     

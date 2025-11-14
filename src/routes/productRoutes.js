@@ -9,7 +9,7 @@ import { getProductById } from '../models/productModel.js';
 const router = express.Router();
 const upload = multer({
   limits: {
-    fileSize: 25 * 1024 * 1024 // 25MB limit
+    fileSize: 30 * 1024 * 1024 // 30MB limit for original images
   }
 });
 
